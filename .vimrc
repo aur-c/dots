@@ -21,8 +21,8 @@ set laststatus=2
 set statusline=
 
 " display
-set wildmenu													" show command completion
-set number													" show line numbers
+set wildmenu                        " show command completion
+set number                          " show line numbers
 set cursorline
 set linebreak												" break lines at word
 set showbreak=+++										" wrap-broken line prefix
