@@ -5,6 +5,7 @@ My simple desktop configuration:
 - dunst as notification manager
 - xterm as terminal
 - bemenu as a quick application launcher
+
 A few scripts to:
 - capture my screen
 - set the wallpaper to the bing daily image
