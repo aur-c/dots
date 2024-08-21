@@ -1,7 +1,7 @@
-*dpi:								192
-*faceName:					Cascadia Mono:size=11:style=Light
-*cursorTheme:				Adwaita
-*allowBoldFonts:		false
+*dpi:               192
+*faceName:          Cascadia Mono:size=11:style=Light
+*cursorTheme:       Adwaita
+*allowBoldFonts:    false
 
 
 !! simple_rainbow
