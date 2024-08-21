@@ -1,0 +1,12 @@
+#!/bin/env bash
+
+set -e
+
+windows=$(i3-msg -t get_tree | jq '.. | objects |
+    select(.window_type == "normal") |
+    {name: (.window_properties.class + ": " + .name), id: .id}')
+
+selected_window=$(echo "$windows" | jq -r '.name' | bemenu --fn 'Cantarell 18' -l 100 -H 38 -M 1300 -c -p 'win:' -B 2 --nb '#1a1a1aF2' --ab '#1a1a1aF2' --hb '#1a1a1aF2' --tb '#1a1a1aF2' --fb '#1a1a1aF2' -i --tf '#ff81b2' --cf '#00000000' --hf '#ff81b2' --bdr '#5f676a40')
+export selected_window
+
+window_id=$(echo "$windows" | jq 'select(.name==env.selected_window) | .id') && i3-msg "[con_id=$window_id] focus"
