@@ -1,0 +1,8 @@
+[Unit]
+Description=download bing wallpaper daily
+
+[Service]
+ExecStart=/home/aurore/.config/i3/scripts/cycle/bing
+
+[Install]
+WantedBy=default.target

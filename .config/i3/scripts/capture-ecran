@@ -1,0 +1,20 @@
+#!/bin/bash
+
+rep=$HOME/Images/Captures
+cd $rep
+
+nom="$rep/%Y-%m-%d-%T-\$wx\$h-\$W.png"
+notif="La capture d'écran a été sauvegardée dans $rep et placée dans votre presse-papier"
+
+case "$1" in
+	--tout|-t)
+	  option=
+		;;
+	--fenêtre|-f)
+		option="--focused"
+		;;
+	--selection|-s)
+	  option="--line mode=edge --select"
+esac
+
+scrot ${option} ${nom} -e 'xclip -sel clip -t image/png -i $f' && notify-send "$notif"

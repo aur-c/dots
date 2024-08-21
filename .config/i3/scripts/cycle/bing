@@ -1,0 +1,13 @@
+#!/bin/bash
+
+date=$(date +"%Y-%m-%d")
+rep=$HOME/Images/bing
+nom=$HOME/.config/i3/fond-decran-bing.jpg
+
+data=$(wget -qO- "https://www.bing.com/HPImageArchive.aspx?idx=0&n=1")
+baseurl=$(grep -oPm1 "(?<=<urlBase>)[^<]+" <<< $data)
+
+wget -O $rep/bing-$date.jpg https://bing.com$baseurl\_UHD.jpg
+cp $rep/bing-$date.jpg $nom
+
+DISPLAY=:0 XAUTHORITY=/home/aurore/.Xauthority feh --bg-fill $nom

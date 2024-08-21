@@ -1,0 +1,13 @@
+#!/bin/bash
+
+rep="$HOME/.config/i3/status/status-média"
+
+while true
+do
+	texte=$(playerctl metadata --format '{{ trunc(artist, 10) }} - {{ trunc(title, 16) }} {{ duration(position) }} {{ duration(mpris:length) }}')
+
+	echo $texte > $rep
+
+	sleep 1
+
+done

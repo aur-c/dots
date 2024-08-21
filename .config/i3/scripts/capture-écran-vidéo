@@ -1,0 +1,28 @@
+#!/bin/bash
+pid=$(</tmp/ffmpeg.pid)
+
+if ps -p $pid > /dev/null
+then
+    kill $pid
+    rm /tmp/ffmpeg.pid
+    
+    notify-send "Vidéo enregistrée et copiée dans le presse papier"
+    exit 1
+fi
+
+slop=$(slop -f "%x %y %w %h %g %i") || exit 1
+read -r X Y W H G ID < <(echo $slop)
+
+date=$(date +"%Y-%m-%d-%H%M%S")
+
+ffmpeg  -f pulse \
+        -f x11grab \
+        -s "$W"x"$H" \
+        -i :0.0+$X,$Y \
+        -crf 28 \
+        -preset slow \
+        ~/Vidéos/Captures/rc-$date.mp4 \
+        &
+
+echo "$!" > /tmp/ffmpeg.pid
+echo "file://$HOME/Vidéos/Captures/rc-$date.mp4" | xclip -sel clip -t text/uri-list -i

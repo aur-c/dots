@@ -1,0 +1,20 @@
+#!/bin/bash
+
+rep="$HOME/.config/i3/status/status-mic"
+
+while true
+do
+	texte=$(pactl get-source-mute @DEFAULT_SOURCE@)
+
+	case $texte in
+		"Mute: yes")
+			echo "mic: muet" > $rep
+			;;
+
+		"Mute: no")
+			echo "mic:" > $rep
+			;;
+	esac
+
+	sleep 1
+done

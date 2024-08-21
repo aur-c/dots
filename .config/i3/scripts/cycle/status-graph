@@ -1,0 +1,24 @@
+#!/bin/bash
+
+rep="$HOME/.config/i3/status/status-graph"
+
+while true
+do    
+    status=$(cat /sys/bus/pci/devices/0000:01:00.0/power/runtime_status)
+
+    if [ $status == "suspended" ]
+    then
+        echo="suspendu"
+    fi
+
+    if [ $status == "active" ]
+    then
+        use=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits)
+        temp=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits)
+        echo="$use% $temp°C"
+    fi
+
+    echo $echo > $rep
+    killall -USR1 i3status
+    sleep 10
+done
